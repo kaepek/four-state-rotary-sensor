@@ -4,7 +4,7 @@ A rotary sensor capable of measuring angular: displacement, velocity, accelerati
 
 # Supported sensors/platforms include:
 
-- [The AS5147P rotary encoder on the teensy40 platform.](./lib/kalman-four-state-teensy40-AS5147P-rotary-encoder/)
+- [The AS5147P rotary encoder on the teensy40 platform.](./lib/kalman-four-state-teensy40-AS5147P-rotary-encoder/kalman-four-state-teensy40-AS5147P-rotary-encoder.ino)
 
 # Install repo
 
