@@ -142,6 +142,7 @@ void setup()
   }
 }
 
+// Create a 1D four state Kalman filter: 
 double alpha = 50000.0;
 double angular_resolution_error = 40.0;
 double process_noise = 0.000000000001;
