@@ -2,10 +2,13 @@
 #include "imxrt.h"
 #include "kalman_four_state/kalman_jerk.cpp"
 #include "encoder/digital_encoder.cpp"
-#include "lib/generic/encoder_sample_validator.cpp"
+#include "encoder/generic/encoder_sample_validator.cpp"
 #include "TeensyTimerTool.h"
 
 using namespace TeensyTimerTool;
+
+// Create a timer to allow for periodic logging to the serial port with the rotary sensor's Kalman and Eular state.
+PeriodicTimer logging_timer(GPT2);
 
 /**
  * FourStateTeensy40AS5147PRotarySensor
@@ -35,8 +38,11 @@ namespace kaepek
     void post_fault_logic(EncoderSampleValidator::Fault fault_code)
     {
       // Stop logging.
-      Serial.println("A fault occured. Check your encoder connection.")
+      logging_timer.stop();
+      // Print that a fault has occured.
+      Serial.println("A fault occured. Check your encoder connection.");
     }
+
   };
 }
 
@@ -90,6 +96,10 @@ void print_eular_flat(double *eular_vec)
   Serial.print(eular_vec[4]);
 }
 
+// Rotary encoder Kalman/Eular state storage.
+kaepek::Dbl4x1 kalman_vec_store = {};
+kaepek::Dbl5x1 eular_vec_store = {};
+
 // Method to print both the Eular and Kalman state of the rotary sensor from the cache.
 void print_k()
 {
@@ -98,13 +108,6 @@ void print_k()
   print_kalman_flat(kalman_vec_store, false);
   Serial.print("\n");
 }
-
-// Rotary encoder Kalman/Eular state storage.
-kaepek::Dbl4x1 kalman_vec_store = {};
-kaepek::Dbl4x1 eular_vec_store = {};
-
-// Create a timer to allow for periodic logging to the serial port with the rotary sensor's Kalman and Eular state.
-PeriodicTimer logging_timer(GPT2);
 
 void setup()
 {
