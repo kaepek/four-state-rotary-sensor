@@ -1,0 +1,8 @@
+[submodule "external/kaepek-encoder"]
+	path = external/kaepek-encoder
+	url = git@github.com:kaepek/encoder.git
+	branch = RELEASE/v1.0.0
+[submodule "external/kaepek-kalman"]
+	path = external/kaepek-kalman
+	url = git@github.com:kaepek/kalman.git
+	branch = RELEASE/v1.1.1
