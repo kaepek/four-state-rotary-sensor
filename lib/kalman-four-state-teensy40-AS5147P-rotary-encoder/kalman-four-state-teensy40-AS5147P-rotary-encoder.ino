@@ -35,6 +35,7 @@ namespace kaepek
     void post_fault_logic(EncoderSampleValidator::Fault fault_code)
     {
       // Stop logging.
+      Serial.println("A fault occured. Check your encoder connection.")
     }
   };
 }
@@ -48,7 +49,7 @@ kaepek::FourStateTeensy40AS5147PRotarySensor sampler;
 // Define bool for knowing if the sampler started is a good state.
 bool started_ok = false;
 
-// Methods to print Kalman state via serial port.
+// Method to print Kalman state via the serial port.
 void print_kalman_flat(double *kalman_vec)
 {
   Serial.print(kalman_vec[0]);
@@ -60,7 +61,7 @@ void print_kalman_flat(double *kalman_vec)
   Serial.print(kalman_vec[3]);
 }
 
-// Methods to print Kalman state via serial port.
+// Method to print Kalman state via the serial port with option to ignore printing the displacement.
 void print_kalman_flat(double *kalman_vec, bool dont_print_disp)
 {
   if (dont_print_disp == false)
@@ -75,6 +76,7 @@ void print_kalman_flat(double *kalman_vec, bool dont_print_disp)
   Serial.print(kalman_vec[3]);
 }
 
+// Method to print the Eular state via the serial port.
 void print_eular_flat(double *eular_vec)
 {
   Serial.print(eular_vec[0]);
@@ -88,6 +90,7 @@ void print_eular_flat(double *eular_vec)
   Serial.print(eular_vec[4]);
 }
 
+// Method to print both the Eular and Kalman state of the rotary sensor from the cache.
 void print_k()
 {
   print_eular_flat(eular_vec_store);
