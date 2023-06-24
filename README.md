@@ -14,7 +14,7 @@ git clone --recurse-submodules git@github.com:kaepek/rotary-sensor.git
 
 # Visualising output
 
-To view the data coming from the serial port via this tool is [SerialPlot](https://github.com/hyOzd/serialplot). A serialplot settings file is provided [here](./resources/serialplot.ini).
+To view the data coming from the serial port via this tool is [SerialPlot](https://github.com/hyOzd/serialplot), a serialplot settings file is provided [here](./resources/serialplot.ini).
 
 ![Example plot output](./resources/SerialPlot-output.png)
 
