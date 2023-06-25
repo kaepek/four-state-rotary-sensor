@@ -1,4 +1,4 @@
-# KAEPEK-FOUR-STATE-ROTARY-ENCODER V1.0.0
+# KAEPEK-FOUR-STATE-ROTARY-ENCODER V1.1.0
 
 A rotary sensor capable of measuring angular: displacement, velocity, acceleration and jerk. 
 
@@ -9,7 +9,7 @@ A rotary sensor capable of measuring angular: displacement, velocity, accelerati
 # Install repo
 
 ```
-git clone --recurse-submodules git@github.com:kaepek/rotary-sensor.git
+git clone --recurse-submodules git@github.com:kaepek/four-state-rotary-sensor.git
 ```
 
 # Visualising output

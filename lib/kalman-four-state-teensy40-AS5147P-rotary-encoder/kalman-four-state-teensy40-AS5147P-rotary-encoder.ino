@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include "imxrt.h"
 #include "kalman_four_state/kalman_jerk.cpp"
-#include "encoder/digital_encoder.cpp"
-#include "encoder/generic/encoder_sample_validator.cpp"
+#include "encoder/digital_rotary_encoder.cpp"
+#include "encoder/generic/rotary_encoder_sample_validator.cpp"
 #include "TeensyTimerTool.h"
 
 using namespace TeensyTimerTool;
@@ -18,16 +18,16 @@ PeriodicTimer logging_timer(GPT2);
  */
 namespace kaepek
 {
-  class FourStateTeensy40AS5147PRotarySensor : public EncoderSampleValidator
+  class FourStateTeensy40AS5147PRotarySensor : public RotaryEncoderSampleValidator
   {
   public:
     // Default constuctor.
-    FourStateTeensy40AS5147PRotarySensor() : EncoderSampleValidator()
+    FourStateTeensy40AS5147PRotarySensor() : RotaryEncoderSampleValidator()
     {
     }
 
     // Constructor with parameters.
-    FourStateTeensy40AS5147PRotarySensor(DigitalEncoderSPI encoder, float sample_period_microseconds) : EncoderSampleValidator(encoder, sample_period_microseconds)
+    FourStateTeensy40AS5147PRotarySensor(DigitalRotaryEncoderSPI encoder, float sample_period_microseconds) : RotaryEncoderSampleValidator(encoder, sample_period_microseconds)
     {
     }
 
@@ -35,7 +35,7 @@ namespace kaepek
     {
     }
 
-    void post_fault_logic(EncoderSampleValidator::Fault fault_code)
+    void post_fault_logic(RotaryEncoderSampleValidator::Fault fault_code)
     {
       // Stop logging.
       logging_timer.stop();
@@ -49,7 +49,7 @@ namespace kaepek
 // Define encoder pin config struct.
 kaepek::DigitalEncoderPinsSPI enc_pins = kaepek::DigitalEncoderPinsSPI();
 // Define the encoder.
-kaepek::DigitalEncoderSPI enc;
+kaepek::DigitalRotaryEncoderSPI enc;
 // Define the encoder sampler.
 kaepek::FourStateTeensy40AS5147PRotarySensor sampler;
 // Define bool for knowing if the sampler started is a good state.
@@ -119,7 +119,7 @@ void setup()
   enc_pins.sck = 22;
 
   // Initalise the encoder with giving it the pin configuration.
-  enc = kaepek::DigitalEncoderSPI(enc_pins);
+  enc = kaepek::DigitalRotaryEncoderSPI(enc_pins);
 
   // Initalise the encoder sampler.
   sampler = kaepek::FourStateTeensy40AS5147PRotarySensor(enc, 2.0); // 2us (micro) sample period
